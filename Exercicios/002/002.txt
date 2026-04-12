@@ -1,0 +1,79 @@
+1: Conceitual - Importância da Preparação
+Explique por que a etapa de preparação de dados pode impactar mais o desempenho de um modelo do que a escolha do algoritmo de Machine Learning.
+
+R: A preparação de dados pode impactar mais o desempenho do modelo porque o algoritmo depende totalmente da qualidade dos dados para aprender. Se houver ruídos, outliers, valores ausentes, redundâncias, desbalanceamento ou atributos irrelevantes, o modelo pode aprender relações erradas e ficar enviesado. Além disso, a preparação também ajusta os dados ao tipo de algoritmo, por exemplo com normalização, conversão e seleção de atributos. Por isso, muitas vezes preparar bem os dados traz mais resultado do que apenas trocar o algoritmo.
+
+
+2: Valores Ausentes
+Considere um dataset com 10.000 registros onde 25% das entradas da variável idade estão ausentes.
+a) Quais são as possíveis estratégias para tratar esses valores?:
+R: Estratégias para tratar o que tá ausente seria remover registros com os valores que não existem, podemos preencher manualmente com ajuda de especialista, ou preencher automaticamente, utilizando valores estatísticos, no caso de idade, a media ou mediana. Se houver outliers de idade, mediana é melhor.
+
+b) Em quais situações remover registros é inadequado?
+R: É ruim quando a quantidade de valores ausente é grande, posso perder coisa importante e a sua representação do dataset. Pode causar viés, por que eu posso remover casos raros.
+
+3: Normalização vs Padronização
+Explique a diferença entre:
+* Normalização (Min-Max)
+* Padronização (Z-score)
+Em quais tipos de algoritmos cada uma é mais recomendada? Justifique.
+
+Normalização Min-Max eu rescaldo os valores do atributo num intervalo fixo, entre 0 e 1. O Z-score, eu gero uma variável com media 0 e variada 1, eu uso a padronização para centralizar os dados e ajusto dispersão. Já a mini-max eu mantenho os dados numa faixa da valores. Eu uso as duas para algoritmo sensível a escala. 
+
+4: Com a variável clima = { sol, chuva, nublado } 
+a) Como transformar essa variável para uso em um modelo de ML?
+R: Depende, se eu quero transformar o atribulo clima em numérico. Eu posso criar o one-hot, que cria colunas de binários a cada possibilidade, porque não tem ordem nominal. 
+b) Qual problema pode ocorrer se utilizarmos apenas codificação numérica simples (0,1.2)?
+R: Eu posso ter um problema se eu colocar (0,1,2) Por que pode trazer a ideia de ordem e hierarquia. 
+
+5: Overfitting e Separação de Dados
+Explique por que dividimos o dataset em:
+* Treino
+* Validação
+* Teste
+O que acontece se utilizarmos o conjunto de teste durante o treinamento?
+R: Dividimos o dataset em treino, validação e teste porque cada parte cumpre um papel diferente. O conjunto de treino é usado para o modelo aprender os padrões dos dados. O conjunto de validação é usado para ajustar hiperparâmetros e comparar configurações sem comprometer o final. O conjunto de teste é reservado para medir o desempenho real do modelo em dados nunca vistos. Se o conjunto de teste for usado durante o treinamento, ele deixa de ser independente, a avaliação fica enviesada e o modelo pode parecer melhor do que realmente é, caracterizando uma medição inadequada da capacidade de generalização.
+
+
+6: Balanceamento de Classes
+Considere um problema onde:
+* 95% das amostras pertencem à classe A
+* 5% pertencem à classe B
+
+a) Qual problema pode ocorrer?
+R: O modelo fica enviesado demais. Por que a parte majoritária	acaba sempre sendo escolhida.
+b) Cite duas técnicas para tratar esse desbalanceamento.
+R: Eu posso diminuir a classe majoritária usando CNN ou aumentar a classe minoritária usando SMOTE. Criando dados sintéticos.
+
+7: Detecção de Outliers
+Explique:
+* O que são outliers
+* Quando removê-los pode prejudicar o modelo
+* Um método estatístico para detectá-los
+R: Outliers são valores atípicos, muito diferentes dos demais, que podem ou não ser resultado de erro. Removê-los pode prejudicar o modelo quando eles representam casos reais importantes, pois isso reduz a representatividade do dataset e pode eliminar informação relevante. Um método estatístico para detectá-los é o Z-score, que mede a distância de um valor em relação à média em unidades de desvio padrão.
+
+8: Feature Engineering
+Dado o dataset: data_nascimento
+Explique por que criar a variável idade pode ser melhor do que usar diretamente a data de nascimento?
+
+A data de nascimento ele vai ser um dado que pode ser muito particionado por conta dos dias, já a idade ela pode trazer menos frequência, e se quiser transformar para simbólico eu posso usar tecias de discretização supervisionar ou não supervisionada. E também resume a informação do individuo para um formato mais relevante para o modelo. 
+
+9: Pipeline de Pré-processamento
+Descreva um pipeline completo de preparação para um dataset que contém:
+* Valores ausentes: Aqui eu primeiro avaliaria a quantidade de valores ausentes e a importância deles. Se forem poucos, eu posso preencher manualmente ou até remover alguns registros, mas sempre olhando se isso não vai prejudicar a representatividade dos dados. Se forem muitos, o mais adequado é fazer preenchimento automático, usando média, mediana, moda ou até um modelo preditivo, dependendo do tipo do atributo.
+* Dados categóricos: Primeiro eu preciso entender se os atributos categóricos têm ordem ou não. Se não tiverem ordem, como em atributos nominais, eu posso usar one-hot encoding, criando colunas binárias para cada possibilidade do atributo. Se tiverem ordem, eu posso usar uma codificação que preserve isso, como o código termômetro
+* Variáveis com escalas diferentes: Quando as variáveis estão em escalas muito diferentes, uma pode acabar tendo mais peso que a outra, principalmente em algoritmos baseados em distância. Nesse caso, eu posso usar normalização Min-Max ou padronização por Z-score para deixar os valores mais comparáveis.
+* Classes desbalanceadas: Aqui eu verificaria se existe uma classe muito maior que a outra, porque isso pode enviesar o modelo. Para tratar isso, eu posso aumentar a classe minoritária com técnicas de sobreamostragem, como SMOTE ou ADASYN, ou diminuir a classe majoritária com subamostragem.
+
+10: Estudo de Caso Aplicado
+Você recebeu um dataset para prever aprovação em crédito bancário.
+Variáveis:
+- renda_mensal
+- idade
+- estado_civil
+- número_de_dependentes
+- histórico_de_inadimplência
+
+Descreva todas as etapas de preparação antes de treinar o modelo. Seja específico.
+
+R: Antes de treinar o modelo, eu faria uma preparação completa dos dados. Primeiro, eu identificaria o tipo de cada variável. renda_mensal é numérica contínua, idade é numérica, estado_civil é categórica nominal, número_de_dependentes é numérica discreta e histórico_de_inadimplência pode ser tratado como categórica binária, por exemplo sim ou não. Como o problema é prever aprovação em crédito, a variável alvo seria categórica binária, como aprovado e reprovado. Depois, eu analisaria a qualidade dos dados. Supondo um dataset com 10.000 clientes, eu imaginaria algo como 6% de valores ausentes em renda_mensal, 2% em idade, 1% em estado_civil, 0,5% em número_de_dependentes e 3% em histórico_de_inadimplência. Como renda_mensal e idade são variáveis numéricas, eu poderia preencher os valores ausentes com mediana, porque ela é mais robusta que a média em presença de valores extremos. Por exemplo, se a mediana da renda for R$ 4.200 e a mediana da idade for 36 anos, eu poderia usar esses valores como imputação. Em estado_civil, eu poderia preencher pela moda, por exemplo casado, ou criar a categoria desconhecido. Em histórico_de_inadimplência, eu também poderia usar a moda ou uma categoria específica para ausência. Remover registros só seria aceitável se a quantidade de faltantes fosse muito pequena e isso não afetasse a representatividade da base. Na sequência, eu verificaria a presença de outliers. Em renda_mensal, por exemplo, poderia haver casos como R$ 250.000 em uma base cuja maioria está entre R$ 1.500 e R$ 12.000. Em idade, poderia aparecer alguém com 5 anos ou 130 anos, o que provavelmente indicaria erro. Eu usaria análise estatística, como desvio em relação à distribuição esperada ou inspeção por faixa que faria sentido, para decidir se esses valores são erros ou casos raros reais. Se fossem erros claros, eu corrigiria ou removeria. Se fossem extremos reais, eu pensaria em suavização ou manutenção, dependendo do impacto no problema. Depois, eu trataria os dados categóricos. estado_civil, com categorias como solteiro, casado, divorciado e viúvo, deve ser transformado por one-hot encoding, porque é um atributo categórico nominal e não possui ordem natural. Já histórico_de_inadimplência, se vier como sim e não, pode ser convertido para uma forma binária como 0 e 1. O importante aqui é garantir que o algoritmo consiga trabalhar numericamente com essas informações sem criar hierarquia artificial onde ela não existe. Em seguida, eu observaria o balanceamento das classes. Supondo que 8.000 clientes estejam como aprovado e 2.000 como reprovado, a base estaria desbalanceada. Isso pode fazer o modelo favorecer excessivamente a classe majoritária. Para corrigir isso, eu poderia usar sobreamostragem da classe minoritária, como SMOTE, ou subamostragem da classe majoritária. Como o conjunto ainda teria tamanho razoável, eu tenderia a testar SMOTE primeiro, para não perder dados da classe majoritária. Depois disso, eu faria a normalização das variáveis numéricas, porque vamos usar KNN. Esse é um passo central. renda_mensal pode variar de 800 até 50.000, idade de 18 até 80, e número_de_dependentes de 0 até 6. Se eu não normalizar, a renda pode dominar o cálculo da distância e o modelo praticamente ignorar as outras variáveis. Por isso, eu aplicaria normalização Min-Max ou padronização por Z-score nas variáveis numéricas. Como o KNN é sensível à escala, essa etapa é obrigatória na prática. Depois, eu avaliaria redundância e relevância dos atributos. Por exemplo, se histórico_de_inadimplência já resumir muito bem o risco do cliente e eu também tiver várias outras colunas derivadas disso, poderia haver redundância. Nesse caso, eu verificaria correlação, distribuição e utilidade preditiva dos atributos para decidir se algum deveria ser removido. Mesmo com poucas variáveis, essa análise ajuda a evitar ruído e melhorar a representação do problema. Por fim, eu separaria os dados em treino, validação e teste, ou pelo menos treino e teste com estratificação, para preservar a proporção entre aprovados e reprovados. Como vamos usar KNN, eu ainda testaria diferentes valores de K, como 3, 5, 7 e 9, usando a validação para escolher a melhor configuração sem contaminar o teste final. Assim, o pipeline completo seria: identificar tipos de atributos, tratar valores ausentes, verificar outliers, codificar variáveis categóricas, balancear classes, normalizar variáveis numéricas, analisar relevância dos atributos e só então separar treino e teste para treinar o KNN.
