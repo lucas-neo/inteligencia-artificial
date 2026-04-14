@@ -8,6 +8,13 @@ Repositório usado para organizar materiais da disciplina de Inteligência Artif
 - Curso: Engenharia de Software
 - Professor: Munif Gebara
 
+
+## Membros
+- Amanda Lorena Ferreira Silverio RA: 23130634-2
+- Lucas Bufalo Neo de Carvalho RA: 23135193-2
+- Murilo Silva Barbosa 23272159-2
+- Raul Lopes Jorge, RA: 23141747-2
+
 ## Organização
 
 O projeto está dividido em duas pastas principais:
